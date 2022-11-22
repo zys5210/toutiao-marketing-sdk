@@ -17,9 +17,9 @@ class TouTiaoClient
 {
     public static $access_token;
 
-    public static $server_url = 'https://ad.toutiao.com/open_api';
+    public static $server_url = 'https://ad.oceanengine.com/open_api';
 
-    public static $box_url = 'https://test-ad.toutiao.com/open_api';
+    public static $box_url = 'https://test-ad.oceanengine.com/open_api';
 
     public static $is_sanbox = false;
 
