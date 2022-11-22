@@ -20,9 +20,9 @@ class ToutiaoAuth
 
     public $secret;
 
-    public $server_url = 'https://ad.toutiao.com/open_api';
+    public $server_url = 'https://ad.oceanengine.com/open_api';
 
-    public $box_url = 'https://test-ad.toutiao.com/open_api';
+    public $box_url = 'https://test-ad.oceanengine.com/open_api';
 
     public $is_sanbox = false;
 
@@ -95,10 +95,10 @@ class ToutiaoAuth
      * @param $cb_url
      * @return string
      */
-    public function getAuthCodeUrl($cb_url, $state = "your_custom_params")
+    public function getAuthCodeUrl($cb_url, $state = "your_custom_params", $scope='[1,2,3,4,5]')
     {
         $cb_url_encode = urlencode($cb_url);
-        return "https://ad.toutiao.com/openapi/audit/oauth.html?app_id=$this->app_id&state=$state&scope=%5B1%2C2%2C3%2C4%2C5%5D&redirect_uri={$cb_url_encode}";
+        return $this->server_url."/audit/oauth.html?app_id=$this->app_id&state=$state&scope=".urlencode($scope)."&redirect_uri={$cb_url_encode}";
     }
 
     /**
