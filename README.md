@@ -4,12 +4,12 @@
 ## Installation
 
 ```
-composer require rx-coder/toutiao-marketing-sdk:*
+composer require zys5210/toutiao-marketing-sdk:*
 ```
 
 ## Api Doc 
 
-- https://ad.toutiao.com/openapi/doc/index.html?id=30
+- https://open.oceanengine.com/labels/7
 
 ## Requirements
 
@@ -156,13 +156,6 @@ var_dump($req->getBody());
  ------------ | -------------
  获取建站列表 | $client::Tool()->siteGet()
  
-## Authors && Contributors
-
-- xiayifeng
-- zhangwenzong
-
-## Contact information
-- QQ群：712720083
 
 ## License
 
