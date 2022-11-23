@@ -98,7 +98,7 @@ class ToutiaoAuth
     public function getAuthCodeUrl($cb_url, $state = "your_custom_params", $scope='[1,2,3,4,5]')
     {
         $cb_url_encode = urlencode($cb_url);
-        return "https://ad.oceanengine.com/open_api/audit/oauth.html?app_id=$this->app_id&state=$state&scope=".urlencode($scope)."&redirect_uri={$cb_url_encode}";
+        return "https://open.oceanengine.com/open_api/audit/oauth.html?app_id=$this->app_id&state=$state&scope=".urlencode($scope)."&redirect_uri={$cb_url_encode}";
     }
 
     /**
