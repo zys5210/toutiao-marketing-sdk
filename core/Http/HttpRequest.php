@@ -35,7 +35,7 @@ class HttpRequest
     {
         $httpMethod = strtoupper($httpMethod);
         if ($httpMethod == 'GET') {
-            $url .=  strpos('?', $url) ? '?' : '&' . http_build_query($postFields);
+            $url .=  strpos('?', $url) ? '&' : '?' . http_build_query($postFields);
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $httpMethod);
