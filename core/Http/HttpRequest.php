@@ -33,7 +33,10 @@ class HttpRequest
      */
     public static function curl($url, $httpMethod = 'GET', $postFields = null, $headers = null)
     {
-
+        $httpMethod = strtoupper($httpMethod);
+        if ($httpMethod == 'GET') {
+            $url .=  strpos('?', $url) ? '?' : '&' . http_build_query($postFields);
+        }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $httpMethod);
         if (defined("ENABLE_HTTP_PROXY") && defined("HTTP_PROXY_IP") && defined("HTTP_PROXY_PORT") && ENABLE_HTTP_PROXY) {
