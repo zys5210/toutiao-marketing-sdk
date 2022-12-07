@@ -33,9 +33,9 @@ class HttpRequest
      */
     public static function curl($url, $httpMethod = 'GET', $postFields = null, $headers = null)
     {
-        $httpMethod = strtoupper($httpMethod);
-        if ($httpMethod == 'GET') {
-            $url .=  strpos('?', $url) ? '&' : '?' . http_build_query($postFields);
+        if(is_array($postFields)) {
+            $postFields = self::getPostHttpBody($postFields);
+            $url .= strpos('?', $url) ? '&' : '?' . $postFields;
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $httpMethod);
@@ -49,7 +49,7 @@ class HttpRequest
         curl_setopt($ch, CURLOPT_FAILONERROR, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($postFields) ? self::getPostHttpBody($postFields) : $postFields);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
 
         if (self::$readTimeout) {
             curl_setopt($ch, CURLOPT_TIMEOUT, self::$readTimeout);
