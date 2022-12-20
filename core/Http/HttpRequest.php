@@ -35,7 +35,9 @@ class HttpRequest
     {
         if(is_array($postFields)) {
             $postFields = self::getPostHttpBody($postFields);
-            $url .= strpos('?', $url) ? '&' : '?' . $postFields;
+            if(is_string($postFields)) {
+                $url .= strpos('?', $url) ? '&' : '?' . $postFields;
+            }
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $httpMethod);
