@@ -34,10 +34,13 @@ class HttpRequest
     public static function curl($url, $httpMethod = 'GET', $postFields = null, $headers = null)
     {
         if(is_array($postFields)) {
-            $postFields = self::getPostHttpBody($postFields);
-            if(is_string($postFields)) {
-                $url .= strpos('?', $url) ? '&' : '?' . $postFields;
-            }
+            if ( $httpMethod == 'GET' ) {
+                foreach ($postFields as $key => $value) {
+                    $postFields[$key] = is_string($value) ? $value : json_encode($value);
+                }
+                $url .= strpos('?', $url) ? '&' : '?' . http_build_query($postFields);
+            } else
+                $postFields = self::getPostHttpBody($postFields);
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $httpMethod);
