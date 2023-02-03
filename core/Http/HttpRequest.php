@@ -40,7 +40,7 @@ class HttpRequest
                 }
                 $url .= strpos('?', $url) ? '&' : '?' . http_build_query($postFields);
             } else
-                $postFields = self::getPostHttpBody($postFields);
+                $postFields = self::getPostHttpBody($postFields, $headers);
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $httpMethod);
@@ -98,9 +98,9 @@ class HttpRequest
      *
      * @return bool|string
      */
-    public static function getPostHttpBody($postFildes)
+    public static function getPostHttpBody($postFildes, $headers)
     {
-        $isMultipart = false;
+        $isMultipart = empty($headers['Content-Type']) ? false : (strpos($headers['Content-Type'], 'multipart') === false ? false : true);
         foreach ($postFildes as $apiParamKey => $apiParamValue) {
             if ("@" == substr($apiParamValue, 0, 1)) {
                 $isMultipart = true;
