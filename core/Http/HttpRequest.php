@@ -38,7 +38,7 @@ class HttpRequest
                 foreach ($postFields as $key => $value) {
                     $postFields[$key] = is_string($value) ? $value : json_encode($value);
                 }
-                $url .= strpos('?', $url) ? '&' : '?' . http_build_query($postFields);
+                $url .= (strpos($url, '?') ? '&' : '?') . http_build_query($postFields);
             } else
                 $postFields = self::getPostHttpBody($postFields, $headers);
         }
